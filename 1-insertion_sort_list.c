@@ -31,22 +31,22 @@ void insertion_sort_list(listint_t **list)
 
 /**
  * swapDoubleList - Helper function to swap two nodes in a doubly-linked list.
- * It updates the pointers of the nodes and the head of the list if necessary. *
+ * It updates the pointers of the nodes and the head of the list if necessary.
  * @head: Pointer to the head of the list.
  * @nodeA: First node to be swapped.
  * @nodeB: Second node to be swapped.
  */
 void swapDoubleList(listint_t **head, listint_t **nodeA, listint_t *nodeB)
 {
-    (*nodeA)->next = nodeB->next;
-    if (nodeB->next != NULL)
-        nodeB->next->prev = *nodeA;
-    nodeB->prev = (*nodeA)->prev;
-    nodeB->next = *nodeA;
-    if ((*nodeA)->prev != NULL)
-        (*nodeA)->prev->next = nodeB;
-    else
-        *head = nodeB;
-    (*nodeA)->prev = nodeB;
-    *nodeA = nodeB->prev;
+	(*nodeA)->next = nodeB->next;
+	if (nodeB->next != NULL)
+		nodeB->next->prev = *nodeA;
+	nodeB->prev = (*nodeA)->prev;
+	nodeB->next = *nodeA;
+	if ((*nodeA)->prev != NULL)
+		(*nodeA)->prev->next = nodeB;
+	else
+		*head = nodeB;
+	(*nodeA)->prev = nodeB;
+	*nodeA = nodeB->prev;
 }
