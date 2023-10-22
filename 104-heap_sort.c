@@ -9,59 +9,54 @@
 
 void heap_sort(int *array, size_t size)
 {
-	int i, temp;
-	size_t idx;
+	int temp;
+	size_t i;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = size / 2 - 1; i >= 0; i--)
+	for (i = size / 2; i > 0; i--)
 	{
-		idx = makeHeap(array, size, (size_t)i);
-		if (idx != (size_t)i)
-			print_array(array, size);
+		makeHeap(array, size, size, i - 1);
 	}
 
-	for (i = size - 1; i > 0; i--)
+	for (i = size; i > 1; i--)
 	{
 		temp = array[0];
-		array[0] = array[i];
-		array[i] = temp;
-		idx = makeHeap(array, (size_t)i, 0);
-		if (idx != 0)
-			print_array(array, size);
+		array[0] = array[i - 1];
+		array[i - 1] = temp;
+		print_array(array, size);
+		makeHeap(array, size, i - 1, 0);
 	}
 }
+
 /**
- * makeHeap - Ensures that the given binary tree rooted at index 'i' satisfies
- * the max-heap property: the value of each node is greater than or equal to
- * the values of its children. If the max-heap property is violated, the
- * function swaps the node with its largest child and recursively adjusts the
- * affected subtree.
- *
- * @arr: The array representing the binary tree.
- * @size: The total number of elements in the array.
- * @i: Index of the node to be checked and adjusted.
- * Return: flag
+ * makeHeap - Turn a binary tree into a complete binary heap.
+ * @array: An array of integers representing a binary tree.
+ * @size: The size of the array/tree.
+ * @base: The index of the base row of the tree.
+ * @root: The root node of the binary tree.
  */
-
-size_t makeHeap(int arr[], size_t size, size_t i)
+void makeHeap(int *array, size_t size, size_t base, size_t root)
 {
-	size_t largest = i, left = 2 * i + 1, right = 2 * i + 2, temp;
+	size_t left, right, largest;
+	int temp;
 
-	if (left < size && arr[left] > arr[largest])
+	left = 2 * root + 1;
+	right = 2 * root + 2;
+	largest = root;
+
+	if (left < base && array[left] > array[largest])
 		largest = left;
-
-	if (right < size && arr[right] > arr[largest])
+	if (right < base && array[right] > array[largest])
 		largest = right;
 
-	if (largest != i)
+	if (largest != root)
 	{
-		temp = arr[i];
-		arr[i] = arr[largest];
-		arr[largest] = temp;
-		return (largest);
+		temp = array[root];
+		array[root] = array[largest];
+		array[largest] = temp;
+		print_array(array, size);
+		makeHeap(array, size, base, largest);
 	}
-
-	return (i);
 }

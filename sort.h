@@ -42,5 +42,5 @@ void merge_subarr(int *subarr, int *buff,
 		  size_t front, size_t mid, size_t back);
 void merge_sort_recursive(int *subarr, int *buff, size_t front, size_t back);
 void heap_sort(int *array, size_t size);
-size_t makeHeap(int arr[], size_t size, size_t i);
+void makeHeap(int *array, size_t size, size_t base, size_t root);
 #endif /* _SORT_H_ */
