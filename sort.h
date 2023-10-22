@@ -38,7 +38,9 @@ void quicksort(int *array, int low, int high, size_t size);
 int partition_lomuto(int *array, int low, int high, size_t size);
 void shell_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
-void merge_subarray(int *subarray, int *buff, size_t f, size_t mid, size_t b);
-void top_down_merge_sort(int *array, int *buffer, size_t left, size_t right);
-
+void merge_subarr(int *subarr, int *buff,
+		  size_t front, size_t mid, size_t back);
+void merge_sort_recursive(int *subarr, int *buff, size_t front, size_t back);
+void heap_sort(int *array, size_t size);
+size_t makeHeap(int arr[], size_t size, size_t i);
 #endif /* _SORT_H_ */
