@@ -45,4 +45,10 @@ void heap_sort(int *array, size_t size);
 void makeHeap(int *array, size_t size, size_t base, size_t root);
 void radix_sort(int *array, size_t size);
 void radix_counting_sort(int *array, size_t size, int sig, int *buff);
+void merge_bitonic_sequence(int *array, size_t size,
+			    size_t start, size_t seq, char order);
+void create_bitonic_sequence(int *array, size_t size,
+			     size_t start, size_t seq, char order);
+void bitonic_sort(int *array, size_t size);
+
 #endif /* _SORT_H_ */
