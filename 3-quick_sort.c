@@ -8,7 +8,7 @@
 
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size <= 1)
+	if (array == NULL || size <= 1 || array == [])
 		return;
 
 	/* Call the recursive quicksort function */
