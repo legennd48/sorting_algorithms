@@ -38,5 +38,5 @@ void quicksort(int *array, int low, int high, size_t size);
 int partition_lomuto(int *array, int low, int high, size_t size);
 void shell_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
-void merge(int *array, int *left, size_t left_size, int *right, size_t right_s);
+void merge(int *array, int *left, size_t left_s, int *right, size_t right_s);
 #endif /* _SORT_H_ */
