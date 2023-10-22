@@ -2,7 +2,7 @@
 
 
 /**
- * merge_bitonic_sequence - Sort a bitonic sequence inside an array of integers.
+ * merge_bitonic_sequence - Sort a bitonic sequence inside an array of ints.
  * @array: An array of integers.
  * @size: The size of the array.
  * @start: The starting index of the sequence in array to sort.

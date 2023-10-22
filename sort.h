@@ -50,5 +50,8 @@ void merge_bitonic_sequence(int *array, size_t size,
 void create_bitonic_sequence(int *array, size_t size,
 			     size_t start, size_t seq, char order);
 void bitonic_sort(int *array, size_t size);
+int hoare_partition(int *array, size_t size, int left, int right);
+void hoare_sort(int *array, size_t size, int left, int right);
+void quick_sort_hoare(int *array, size_t size);
 
 #endif /* _SORT_H_ */
