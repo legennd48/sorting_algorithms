@@ -1,44 +1,56 @@
+#include "sort.h"
+
 /**
- * merge - Merges two sorted sub-arrays into a single sorted array.
- * @array: The original array.
- * @left: The left sub-array.
- * @left_s: Size of the left sub-array.
- * @right: The right sub-array.
- * @right_s: Size of the right sub-array.
+ * merge_subarray - Merge two subarrays into a sorted subarray.
+ * @sub: subarray
+ * @buff: buffer
+ * @f: front
+ * @mid: middle
+ * @back: end
  */
-void merge(int *array, int *left, size_t left_s, int *right, size_t right_s)
+void merge_subarray(int *sub, int *buff, size_t f, size_t mid, size_t back)
 {
-    size_t i = 0, j = 0, k = 0;
+	size_t i, j, k = 0;
 
-    while (i < left_s && j < right_s)
-    {
-        if (left[i] <= right[j])
-        {
-            array[k] = left[i];
-            i++;
-        }
-        else
-        {
-            array[k] = right[j];
-            j++;
-        }
-        k++;
-    }
-
-    while (i < left_s)
-    {
-        array[k] = left[i];
-        i++;
-        k++;
-    }
-
-    while (j < right_s)
-    {
-        array[k] = right[j];
-        j++;
-        k++;
-    }
+	for (i = f, j = mid; i < mid && j < back; k++)
+	{
+		buff[k] = (sub[i] < sub[j]) ? sub[i++] : sub[j++];
+	}
+	for (; i < mid; i++)
+	{
+		buff[k++] = sub[i];
+	}
+	for (; j < back; j++)
+	{
+		buff[k++] = sub[j];
+	}
+	for (i = f, k = 0; i < back; i++)
+	{
+		sub[i] = buff[k++];
+	}
 }
+
+/**
+ * top_down_merge_sort - Implement the merge sort algorithm using
+ * the top-down approach.
+ * @array: array to be sorted
+ * @buffer: just a buffer
+ * @left: left element index
+ * @right: right index
+ */
+void top_down_merge_sort(int *array, int *buffer, size_t left, size_t right)
+{
+	size_t mid;
+
+	if (right - left > 1)
+	{
+		mid = left + (right - left) / 2;
+		top_down_merge_sort(array, buffer, left, mid);
+		top_down_merge_sort(array, buffer, mid, right);
+		merge_subarray(array, buffer, left, mid, right);
+	}
+}
+
 
 /**
  * merge_sort - Sorts an array of integers in ascending order using
@@ -48,25 +60,19 @@ void merge(int *array, int *left, size_t left_s, int *right, size_t right_s)
  */
 void merge_sort(int *array, size_t size)
 {
-    if (array == NULL || size < 2)
-        return;
+	int *buffer;
 
-    size_t mid = size / 2;
-    int left[mid];
-    int right[size - mid];
+	if (array == NULL || size < 2)
+	{
+		return;
+	}
 
-    for (size_t i = 0; i < mid; i++)
-    {
-        left[i] = array[i];
-    }
+	buffer = malloc(sizeof(int) * size);
+	if (buffer == NULL)
+	{
+		return;
+	}
 
-    for (size_t i = mid; i < size; i++)
-    {
-        right[i - mid] = array[i];
-    }
-
-    merge_sort(left, mid);
-    merge_sort(right, size - mid);
-
-    merge(array, left, mid, right, size - mid);
+	top_down_merge_sort(array, buffer, 0, size);
+	free(buffer);
 }
