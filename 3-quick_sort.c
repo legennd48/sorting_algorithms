@@ -11,6 +11,8 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size <= 1)
 		return;
 
+	if (check_sort(array, size) == 0)
+		return;
 	/* Call the recursive quicksort function */
 	quicksort(array, 0, size - 1, size);
 }
@@ -77,4 +79,26 @@ void quicksort(int *array, int low, int high, size_t size)
 		quicksort(array, low, pi - 1, size);
 		quicksort(array, pi + 1, high, size);
 	}
+}
+
+/**
+ * check_sort - checks if an array contains sorted elements.
+ * @array: array to be chhecked
+ * @size: size of array
+ * Return: checks if a swap tookplace while traversing the array
+ */
+int check_sort(int *array, size_t size)
+{
+	int flag = 0;
+	size_t i;
+
+	for (i = 0; i < size - 1; i++)
+	{
+		if (array[i] > array[i + 1])
+		{
+			flag = 1;
+			break;
+		}
+	}
+	return (flag);
 }
